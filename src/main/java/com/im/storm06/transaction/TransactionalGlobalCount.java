@@ -26,10 +26,8 @@ public class TransactionalGlobalCount {
 	public static final int PARTITION_TAKE_PER_BATCH = 3;
 
 	public static final Map<Integer, List<List<Object>>> DATA = new HashMap<Integer, List<List<Object>>>() {
-
 		{
 			put(0, new ArrayList<List<Object>>() {
-
 				{
 					add(new Values("cat"));
 					add(new Values("dog"));
@@ -40,7 +38,6 @@ public class TransactionalGlobalCount {
 				}
 			});
 			put(1, new ArrayList<List<Object>>() {
-
 				{
 					add(new Values("cat"));
 					add(new Values("dog"));
@@ -49,7 +46,6 @@ public class TransactionalGlobalCount {
 				}
 			});
 			put(2, new ArrayList<List<Object>>() {
-
 				{
 					add(new Values("cat"));
 					add(new Values("cat"));
@@ -61,18 +57,13 @@ public class TransactionalGlobalCount {
 	};
 
 	public static class Value {
-
 		int count = 0;
-
 		BigInteger txid;
 	}
 
 	public static class BatchCount extends BaseBatchBolt {
-
 		Object _id;
-
 		BatchOutputCollector _collector;
-
 		int _count = 0;
 
 		@Override
@@ -102,11 +93,8 @@ public class TransactionalGlobalCount {
 	public static String GLOBAL_COUNT_KEY = "GLOBAL-COUNT";
 
 	public static class UpdateGlobalCount extends BaseTransactionalBolt implements ICommitter {
-
 		TransactionAttempt _attempt;
-
 		BatchOutputCollector _collector;
-
 		int _sum = 0;
 
 		@Override
@@ -136,7 +124,7 @@ public class TransactionalGlobalCount {
 			} else {
 				newval = val;
 			}
-			System.out.println("newval.count:"+newval.count);
+			System.out.println("newval.count:" + newval.count);
 			_collector.emit(new Values(_attempt, newval.count));
 		}
 
@@ -147,7 +135,6 @@ public class TransactionalGlobalCount {
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		
 
 		MemoryTransactionalSpout spout = new MemoryTransactionalSpout(DATA, new Fields("words"), PARTITION_TAKE_PER_BATCH);
 		TransactionalTopologyBuilder builder = new TransactionalTopologyBuilder("global-count", "spout", spout, 3);

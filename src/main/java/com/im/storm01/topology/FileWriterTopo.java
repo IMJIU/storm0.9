@@ -10,6 +10,9 @@ import com.im.storm01.bolt.WriterBolt;
 import com.im.storm01.spout.MetaSpout;
 import com.im.storm01.spout.StringScheme;
 import com.im.storm01.utils.PropertyUtil;
+import com.taobao.metamorphosis.client.MetaClientConfig;
+import com.taobao.metamorphosis.client.consumer.ConsumerConfig;
+import com.taobao.metamorphosis.utils.ZkUtils.ZKConfig;
 
 public class FileWriterTopo {
 

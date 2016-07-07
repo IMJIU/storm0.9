@@ -48,7 +48,6 @@ public class CounterTopology {
 				cluster.submitTopology("special-topology", config, builder.createTopology());
 
 				Thread.sleep(500000);
-
 				cluster.shutdown();
 			}
 		} catch (Exception e) {
