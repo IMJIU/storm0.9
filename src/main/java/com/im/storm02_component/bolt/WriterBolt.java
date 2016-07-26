@@ -26,7 +26,7 @@ public class WriterBolt extends BaseBasicBolt {
 		try {
 			writer = new FileWriter("/home/" + UUID.randomUUID().toString());
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+			throw new RuntimeException(e); 
 		}
 	}
 

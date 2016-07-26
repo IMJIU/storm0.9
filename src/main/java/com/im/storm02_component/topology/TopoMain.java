@@ -5,6 +5,7 @@ import com.im.storm02_component.bolt.WriterBolt;
 import com.im.storm02_component.spout.RandomWordSpout;
 
 import backtype.storm.Config;
+import backtype.storm.LocalCluster;
 import backtype.storm.StormSubmitter;
 import backtype.storm.topology.TopologyBuilder;
 import backtype.storm.tuple.Fields;
@@ -24,7 +25,9 @@ public class TopoMain {
 		conf.setNumWorkers(4);
 		conf.setNumAckers(0);
 		conf.setDebug(false);
-		StormSubmitter.submitTopology("comp-test-1", conf, builder.createTopology());
+//		StormSubmitter.submitTopology("comp-test-1", conf, builder.createTopology());
+		LocalCluster cluster = new LocalCluster();
+		cluster.submitTopology("WordCount", conf, builder.createTopology());
 	}
 
 }

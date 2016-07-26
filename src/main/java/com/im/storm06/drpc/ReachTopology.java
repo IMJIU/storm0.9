@@ -27,7 +27,6 @@ import backtype.storm.tuple.Values;
 public class ReachTopology {
 
 	public static Map<String, List<String>> TWEETERS_DB = new HashMap<String, List<String>>() {
-
 		{
 			put("foo.com/blog/1", Arrays.asList("a", "b", "c", "d", "e"));
 			put("engineering.twitter.com/blog/5", Arrays.asList("a", "b", "c", "d"));
@@ -36,7 +35,6 @@ public class ReachTopology {
 	};
 
 	public static Map<String, List<String>> FOLLOWERS_DB = new HashMap<String, List<String>>() {
-
 		{
 			put("a", Arrays.asList("a", "c", "d", "e", "f", "g"));
 			put("b", Arrays.asList("c", "d", "e", "f", "a"));
@@ -49,26 +47,23 @@ public class ReachTopology {
 	};
 
 	public static class GetTweeters extends BaseBasicBolt {
-
 		@Override
 		public void execute(Tuple tuple, BasicOutputCollector collector) {
 			Object id = tuple.getValue(0);
 			String url = tuple.getString(1);
-			System.out.println("GetTweeters arg0:"+id+"-arg1:"+url);
+			System.out.println("GetTweeters arg0:" + id + "-arg1:" + url);
 			List<String> tweeters = TWEETERS_DB.get(url);
 			if (tweeters != null) {
 				for (String tweeter : tweeters) {
-					System.out.println("GetTweeters emit() id:"+id+" tweeter:"+tweeter);
+//					System.out.println("GetTweeters emit() id:" + id + " tweeter:" + tweeter);
 					collector.emit(new Values(id, tweeter));
 				}
 			}
-
 		}
 
 		@Override
 		public void declareOutputFields(OutputFieldsDeclarer declarer) {
 			declarer.declare(new Fields("id", "tweeter"));
-
 		}
 	}
 
@@ -78,11 +73,11 @@ public class ReachTopology {
 		public void execute(Tuple tuple, BasicOutputCollector collector) {
 			Object id = tuple.getValue(0);
 			String tweeter = tuple.getString(1);
-			System.out.println("GetFollowers arg0:"+id+"-arg1:"+tweeter);
+			System.out.println("GetFollowers arg0:" + id + "-arg1:" + tweeter);
 			List<String> followers = FOLLOWERS_DB.get(tweeter);
 			if (followers != null) {
 				for (String follower : followers) {
-					System.out.println("GetFollowers emit() id:"+id+" tweeter:"+tweeter+" follower:"+follower);
+					System.out.println("GetFollowers emit() id:" + id + " tweeter:" + tweeter + " follower:" + follower);
 					collector.emit(new Values(id, follower));
 				}
 			}
@@ -111,13 +106,13 @@ public class ReachTopology {
 
 		@Override
 		public void execute(Tuple tuple) {
-			System.out.println("PartialUniquer execute:"+tuple.getLong(0)+"-"+tuple.getString(1));
+			System.out.println("PartialUniquer execute:" + tuple.getLong(0) + "-" + tuple.getString(1));
 			_followers.add(tuple.getString(1));
 		}
 
 		@Override
 		public void finishBatch() {
-			System.out.println("PartialUniquer finishBatch: id-"+_id+" xx-"+_followers+" size:"+_followers.size());
+			System.out.println("PartialUniquer finishBatch: id-" + _id + " xx-" + _followers + " size:" + _followers.size());
 			_collector.emit(new Values(_id, _followers.size()));
 		}
 
@@ -128,11 +123,8 @@ public class ReachTopology {
 	}
 
 	public static class CountAggregator extends BaseBatchBolt {
-
 		BatchOutputCollector _collector;
-
 		Object _id;
-
 		int _count = 0;
 
 		@Override
@@ -143,13 +135,13 @@ public class ReachTopology {
 
 		@Override
 		public void execute(Tuple tuple) {
-			System.out.println("CountAggregator execute:"+tuple.getLong(0)+"-"+tuple.getInteger(1));
+			System.out.println("CountAggregator execute:" + tuple.getLong(0) + "-" + tuple.getInteger(1));
 			_count += tuple.getInteger(1);
 		}
 
 		@Override
 		public void finishBatch() {
-			System.out.println("CountAggregator finishBatch: id-"+_id+" count:"+_count);
+			System.out.println("CountAggregator finishBatch: id-" + _id + " count:" + _count);
 			_collector.emit(new Values(_id, _count));
 		}
 
@@ -170,9 +162,7 @@ public class ReachTopology {
 
 	public static void main(String[] args) throws AlreadyAliveException, InvalidTopologyException {
 		LinearDRPCTopologyBuilder builder = construct();
-
 		Config conf = new Config();
-
 		if (args == null || args.length < 3) {
 			conf.setMaxTaskParallelism(3);
 			LocalDRPC drpc = new LocalDRPC();
@@ -180,11 +170,11 @@ public class ReachTopology {
 			cluster.submitTopology("reach-drpc", conf, builder.createLocalTopology(drpc));
 
 			String[] urlsToTry = new String[] { "foo.com/blog/1", "engineering.twitter.com/blog/5", "tech.backtype.com/blog/123" };
-
+			System.out.println("=================================================");
 			for (String url : urlsToTry) {
 				System.out.println("Reach of " + url + ": " + drpc.execute("reach", url));
 			}
-
+			System.out.println("=================================================");
 			cluster.shutdown();
 			drpc.shutdown();
 		} else {
