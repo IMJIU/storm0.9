@@ -15,31 +15,27 @@
  * Authors:
  *   wuhua <wq163@163.com> , boyan <killme2008@gmail.com>
  */
-package com.im.storm01.spout;
+package com.im.storm07_zk.spout;
 
-import java.util.concurrent.CountDownLatch;
+import backtype.storm.spout.Scheme;
+import backtype.storm.tuple.Fields;
+import backtype.storm.tuple.Values;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
 
-import com.taobao.metamorphosis.Message;
+public class StringScheme implements Scheme {
 
+	private static final long serialVersionUID = -1641199638262927802L;
 
-/**
- * Meta消息的包装类，关联一个CountDownLatch
- * 
- * @author boyan(boyan@taobao.com)
- * @date 2011-11-8
- * 
- */
-public final class MetaMessageWrapper {
-
-    public final Message message;
-    public final CountDownLatch latch;
-    public volatile boolean success = false;
-
-
-    public MetaMessageWrapper(final Message message) {
-        super();
-        this.message = message;
-        this.latch = new CountDownLatch(1);
+	public List<Object> deserialize(byte[] bytes) {
+        try {
+            return new Values(new String(bytes, "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
+    public Fields getOutputFields() {
+        return new Fields("str");
+    }
 }

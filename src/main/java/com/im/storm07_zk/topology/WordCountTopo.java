@@ -1,8 +1,8 @@
-package com.im.storm01.topology;
+package com.im.storm07_zk.topology;
 
-import com.im.storm01.bolt.WordCounter;
-import com.im.storm01.bolt.WordSpliter;
-import com.im.storm01.spout.WordReader;
+import com.im.storm07_zk.bolt.WordCounter;
+import com.im.storm07_zk.bolt.WordSpliter;
+import com.im.storm07_zk.spout.WordReader;
 
 import backtype.storm.Config;
 import backtype.storm.LocalCluster;
