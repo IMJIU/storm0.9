@@ -29,7 +29,7 @@ public class SentenceSpout extends BaseRichSpout{
 		index ++;
 		if(index >= sentences.length)
 			index = 0;
-		Utils.sleep(1000);
+		Utils.sleep(100);
 	}
 
 	@Override

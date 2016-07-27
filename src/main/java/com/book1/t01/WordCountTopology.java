@@ -29,7 +29,7 @@ public class WordCountTopology {
 		Config config = new Config();
 		LocalCluster cluster = new LocalCluster();
 		cluster.submitTopology(TOPOLOGY_NAME, config, builder.createTopology());
-		Utils.sleep(2000);
+		Utils.sleep(10000);
 		cluster.killTopology(TOPOLOGY_NAME);
 		cluster.shutdown();
 	}

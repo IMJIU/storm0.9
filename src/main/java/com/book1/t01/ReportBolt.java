@@ -21,7 +21,7 @@ public class ReportBolt extends BaseRichBolt {
 	@Override
 	public void execute(Tuple input) {
 		String word = input.getStringByField("word");
-		Long count = this.counts.get(word);
+		Long count = input.getLongByField("count");
 		this.counts.put(word, count);
 	}
 
