@@ -23,10 +23,10 @@ import storm.trident.tuple.TridentTuple;
 public class XMPPFunction extends BaseFunction{
 	private static final Logger log = Logger.getLogger(XMPPFunction.class);
 	
-	private static final String XMPP_TO = "storm.xmpp.to";
-	private static final String XMPP_USER = "storm.xmpp.user";
-	private static final String XMPP_PASSWORD = "storm.xmpp.password";
-	private static final String XMPP_SERVER = "storm.xmpp.server";
+	public static final String XMPP_TO = "storm.xmpp.to";
+	public static final String XMPP_USER = "storm.xmpp.user";
+	public static final String XMPP_PASSWORD = "storm.xmpp.password";
+	public static final String XMPP_SERVER = "storm.xmpp.server";
 	
 	private XMPPConnection xmppConnection ;
 	private String to ;
