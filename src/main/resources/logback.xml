@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>   
+   <appender name="KAFKA" class="com.book1.t04.log_kafka.KafkaAppender">
+   		<topic>mytopic</topic>
+   		<zookeeperHost>192.168.199.210:2181</zookeeperHost>   
+   		<formatter class="com.book1.t04.formatter.JsonFormatter">
+   			<expectJson>false</expectJson>
+   		</formatter>
+  </appender>   
+     <logger name="com.book1.t04.log_kafka" level="debug" additivity="false">
+        <appender-ref ref="KAFKA"/>
+    </logger>
+    
+  <root level="error">             
+    <appender-ref ref="KAFKA" />   
+  </root>     
+</configuration>
