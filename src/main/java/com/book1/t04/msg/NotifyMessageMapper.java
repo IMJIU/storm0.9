@@ -4,8 +4,8 @@ import java.util.Date;
 
 import storm.trident.tuple.TridentTuple;
 
-public class NotifyMessageMapper  implements MessageMapper{
 
+public class NotifyMessageMapper  implements MessageMapper{
 	@Override
 	public String toMessageBody(TridentTuple tuple) {
 		StringBuilder sb = new StringBuilder();

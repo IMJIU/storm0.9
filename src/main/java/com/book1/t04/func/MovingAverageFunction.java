@@ -1,6 +1,8 @@
 package com.book1.t04.func;
 
-import org.apache.log4j.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.book1.t04.EWMA;
 import com.book1.t04.EWMA.Time;
@@ -11,8 +13,8 @@ import storm.trident.operation.TridentCollector;
 import storm.trident.tuple.TridentTuple;
 
 public class MovingAverageFunction extends BaseFunction{
-	private static final Logger log = Logger.getLogger(MovingAverageFunction.class);
-	
+//	private static final Logger log = Logger.getLogger(MovingAverageFunction.class);
+	private static final Logger log = LoggerFactory.getLogger(MovingAverageFunction.class);
 	private EWMA ewma;
 	private Time emitRatePer;
 	

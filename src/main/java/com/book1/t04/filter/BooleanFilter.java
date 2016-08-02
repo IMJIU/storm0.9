@@ -11,5 +11,6 @@ public class BooleanFilter extends BaseFilter {
     @Override
     public boolean isKeep(TridentTuple tuple) {
         return tuple.getBoolean(0);
+//        return false;
     }
 }

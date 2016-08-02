@@ -6,11 +6,25 @@
    		<formatter class="com.book1.t04.formatter.JsonFormatter">
    			<expectJson>false</expectJson>
    		</formatter>
-  </appender>   
-     <logger name="com.book1.t04.log_kafka" level="debug" additivity="false">
+  </appender>  
+  
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- 过滤器，一个appender可以有多个 -->
+        <!-- 阈值过滤，就是log行为级别过滤，debug及debug以上的信息会被打印出来 -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>debug</level>
+        </filter>
+        <encoder>
+            <!-- pattern模式 %d时间 %thread 线程名 %level行为级别 %logger logger名称 %method 方法名称 %message 调用方法的入参消息 -->
+            <pattern>%-4d [%thread] %-5level %logger.%-10method - %message%n</pattern>
+        </encoder>
+    </appender> 
+  <logger name="com.book1.t04.log_kafka" level="debug" additivity="false">
         <appender-ref ref="KAFKA"/>
-    </logger>
-    
+  </logger>
+   <logger name="com.book1.t04" level="debug" additivity="false">
+        <appender-ref ref="STDOUT"/>
+  </logger>  
   <root level="error">             
     <appender-ref ref="KAFKA" />   
   </root>     

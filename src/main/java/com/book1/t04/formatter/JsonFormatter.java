@@ -8,6 +8,7 @@ public class JsonFormatter implements Formatter{
 	private static final String COMMA = ",";
 	
 	private boolean expectJson = false;
+	
 	public String format(ILoggingEvent event){
 		StringBuilder sb = new StringBuilder();
 		sb.append("{");

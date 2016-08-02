@@ -8,6 +8,20 @@
   <name>storm_demo Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
+  <!-- /smack-core -->
+
+  <!-- https://mvnrepository.com/artifact/org.igniterealtime.smack/smack-core -->
+<dependency>
+    <groupId>org.igniterealtime.smack</groupId>
+    <artifactId>smack-core</artifactId>
+    <version>4.0.7</version>
+</dependency>
+  <!-- https://mvnrepository.com/artifact/org.igniterealtime.smack/smack-tcp -->
+<dependency>
+    <groupId>org.igniterealtime.smack</groupId>
+    <artifactId>smack-tcp</artifactId>
+    <version>4.0.7</version>
+</dependency>
   
   <dependency> 
 	<groupId>org.apache.storm</groupId>

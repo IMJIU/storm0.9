@@ -1,6 +1,7 @@
 package com.book1.t04.func;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.book1.t04.EWMA.Time;
 
@@ -11,8 +12,8 @@ import storm.trident.operation.TridentCollector;
 import storm.trident.tuple.TridentTuple;
 
 public class ThresholdFilterFunction extends BaseFunction {
-	private static final Logger log = Logger.getLogger(ThresholdFilterFunction.class);
-
+//	private static final Logger log = Logger.getLogger(ThresholdFilterFunction.class);
+	private static final Logger log = LoggerFactory.getLogger(ThresholdFilterFunction.class);
 	private static enum State {
 		BELOW, ABOVE;
 	}

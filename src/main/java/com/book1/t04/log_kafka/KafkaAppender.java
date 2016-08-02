@@ -1,4 +1,4 @@
-package com.book1.t04;
+package com.book1.t04.log_kafka;
 
 import java.util.Properties;
 
@@ -17,26 +17,39 @@ public class KafkaAppender extends AppenderBase<ILoggingEvent>{
 	private Producer<String,String>producer;
 	private Formatter formatter;
 	
-	
+	@Override
+	public void addWarn(String msg) {
+		// TODO Auto-generated method stub
+		super.addWarn(msg);
+	}
 	@Override
 	public void start() {
+		System.out.println("start......");
 		if(this.formatter == null){
 			this.formatter = new MessageFormatter();
 		}
 		super.start();
 		Properties props = new Properties();
 		props.put("zk.connect", this.zookeeperHost);
-		props.put("serializer.class", "kafka.serializer.StringEncoder");
+		System.out.println("zookeeper:"+zookeeperHost);
+		 props.put("metadata.broker.list", "192.168.199.210:9092");
+        //配置value的序列化类
+        props.put("serializer.class", "kafka.serializer.StringEncoder");
+        //配置key的序列化类
+        props.put("key.serializer.class", "kafka.serializer.StringEncoder");
 		ProducerConfig config = new ProducerConfig(props);
 		this.producer = new Producer<>(config);
 	}
+	
 	@Override
-	protected void append(ILoggingEvent event) {
+	public void append(ILoggingEvent event) {
 		String payload = this.formatter.format(event);
+//		System.out.println("topic:"+topic+" pay:"+payload);
 		this.producer.send(new KeyedMessage<String, String>(topic, payload));
 	}
 	@Override
 	public void stop() {
+		System.out.println("stop......");
 		super.stop();
 		this.producer.close();
 	}
@@ -72,8 +85,5 @@ public class KafkaAppender extends AppenderBase<ILoggingEvent>{
 	public void setFormatter(Formatter formatter) {
 		this.formatter = formatter;
 	}
-	
-	
-	
 
 }
