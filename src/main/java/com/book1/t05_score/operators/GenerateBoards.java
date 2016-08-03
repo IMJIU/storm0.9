@@ -26,7 +26,7 @@ public class GenerateBoards extends BaseFunction {
         if (!currentBoard.isEndState()) {
             String nextPlayer = Player.next(gameState.getPlayer());
             List<Board> boards = gameState.getBoard().nextBoards(nextPlayer);
-            Log.debug("Generated [" + boards.size() + "] children boards for [" + gameState.toString() + "]");
+            Log.info("Generated [" + boards.size() + "] children boards for [" + gameState.toString() + "]");
             for (Board b : boards) {
                 GameState newGameState = new GameState(b, history, nextPlayer);
                 List<Object> values = new ArrayList<Object>();
@@ -34,7 +34,7 @@ public class GenerateBoards extends BaseFunction {
                 collector.emit(values);
             }
         } else {
-            Log.debug("End game found! [" + currentBoard + "]");
+            Log.info("End game found! [" + currentBoard + "]");
         }
     }
 }

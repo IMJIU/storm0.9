@@ -37,9 +37,9 @@ public class LocalQueueEmitter<T> implements Emitter<Long>, Serializable {
         while (size <= MAX_BATCH_SIZE) {
             List<Object> values = new ArrayList<Object>();
             try {
-                LOG.debug("Waiting on work from [" + this.queueName + "]:[" + getQueue().size() + "]");
+                LOG.debug("Waiting on work from [" + this.queueName + "]:[" + getQueue().size() + "][size:"+size+"]");
                 values.add(getQueue().take());
-                LOG.debug("Got work from [" + this.queueName + "]:[" + getQueue().size() + "]");
+                LOG.debug("Got work from [" + this.queueName + "]:[" + getQueue().size() + "][size:"+size+"]");
             } catch (InterruptedException ex) {
                 // do something smart
             }

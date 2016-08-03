@@ -12,9 +12,9 @@ import com.book1.t05_score.model.Board;
 import com.book1.t05_score.model.GameState;
 import com.book1.t05_score.operators.GenerateBoards;
 import com.book1.t05_score.operators.isEndGame;
+import com.book1.t05_score.trident.func.LocalQueuerFunction;
 import com.book1.t05_score.trident.spout.LocalQueueEmitter;
 import com.book1.t05_score.trident.spout.LocalQueueSpout;
-import com.book1.t05_score.trident.spout.LocalQueuerFunction;
 
 import storm.trident.Stream;
 import storm.trident.TridentTopology;
@@ -40,14 +40,10 @@ public class RecursiveTopology {
         Stream inputStream = topology.newStream("gamestate", workSpout);
 
         inputStream.each(new Fields("gamestate"), new isEndGame())
-                .each(new Fields("gamestate"),
-                        new LocalQueuerFunction<GameState>(scoringSpoutEmitter),
-                        new Fields(""));
+        			.each(new Fields("gamestate"),new LocalQueuerFunction<GameState>(scoringSpoutEmitter), new Fields(""));
 
         inputStream.each(new Fields("gamestate"), new GenerateBoards(), new Fields("children"))
-                .each(new Fields("children"),
-                        new LocalQueuerFunction<GameState>(workSpoutEmitter),
-                        new Fields());
+        			.each(new Fields("children"), new LocalQueuerFunction<GameState>(workSpoutEmitter),new Fields());
 
         return topology.build();
     }
