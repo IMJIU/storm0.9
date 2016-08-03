@@ -1,9 +1,9 @@
-package com.book1.t05_score.operators;
+package com.book1.t06_compute_xox.operators;
 
 import backtype.storm.tuple.Values;
 
-import com.book1.t05_score.model.BestMove;
-import com.book1.t05_score.model.Board;
+import com.book1.t06_compute_xox.model.BestMove;
+import com.book1.t06_compute_xox.model.Board;
 import com.esotericsoftware.minlog.Log;
 
 import storm.trident.operation.BaseAggregator;

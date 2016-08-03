@@ -1,4 +1,4 @@
-package com.book1.t04.formatter;
+package com.book1.t04_log_analysis.formatter;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
 

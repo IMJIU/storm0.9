@@ -1,4 +1,4 @@
-package com.book1.t06_compute_xox.trident.spout;
+package com.packtpub.storm.trident.spout;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

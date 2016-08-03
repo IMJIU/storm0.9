@@ -1,4 +1,4 @@
-package com.book1.t06_compute_xox.trident.spout;
+package com.packtpub.storm.trident.spout;
 
 import backtype.storm.spout.SpoutOutputCollector;
 import backtype.storm.task.TopologyContext;
@@ -8,15 +8,11 @@ import storm.trident.spout.ITridentSpout;
 import java.util.Map;
 
 @SuppressWarnings("rawtypes")
-public class LocalQueueSpout<T> implements ITridentSpout<Long> {
+public class FixEventSpout implements ITridentSpout<Long> {
     private static final long serialVersionUID = 1L;
     SpoutOutputCollector collector;
     BatchCoordinator<Long> coordinator = new DefaultCoordinator();
-    Emitter<Long> emitter;
-
-    public LocalQueueSpout(Emitter<Long> emitter) {
-        this.emitter = emitter;
-    }
+    Emitter<Long> emitter = new FixEventEmitter();
 
     @Override
     public BatchCoordinator<Long> getCoordinator(String txStateId, Map conf, TopologyContext context) {
@@ -35,7 +31,6 @@ public class LocalQueueSpout<T> implements ITridentSpout<Long> {
 
     @Override
     public Fields getOutputFields() {
-        return new Fields("gamestate");
+        return new Fields("message");
     }
-
 }

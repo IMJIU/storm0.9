@@ -1,4 +1,4 @@
-package com.book1.t04.func;
+package com.book1.t04_log_analysis.func;
 
 import java.util.Map;
 
@@ -10,9 +10,9 @@ import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Message.Type;
 import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 
-import com.book1.t04.EWMA;
-import com.book1.t04.EWMA.Time;
-import com.book1.t04.msg.MessageMapper;
+import com.book1.t04_log_analysis.EWMA;
+import com.book1.t04_log_analysis.EWMA.Time;
+import com.book1.t04_log_analysis.msg.MessageMapper;
 
 import backtype.storm.tuple.Values;
 import storm.trident.operation.BaseFunction;

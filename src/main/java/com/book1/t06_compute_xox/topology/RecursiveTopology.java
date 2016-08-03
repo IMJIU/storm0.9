@@ -1,4 +1,4 @@
-package com.book1.t05_score.topology;
+package com.book1.t06_compute_xox.topology;
 
 import backtype.storm.Config;
 import backtype.storm.LocalCluster;
@@ -8,13 +8,13 @@ import backtype.storm.tuple.Fields;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.book1.t05_score.model.Board;
-import com.book1.t05_score.model.GameState;
-import com.book1.t05_score.operators.GenerateBoards;
-import com.book1.t05_score.operators.isEndGame;
-import com.book1.t05_score.trident.func.LocalQueuerFunction;
-import com.book1.t05_score.trident.spout.LocalQueueEmitter;
-import com.book1.t05_score.trident.spout.LocalQueueSpout;
+import com.book1.t06_compute_xox.model.Board;
+import com.book1.t06_compute_xox.model.GameState;
+import com.book1.t06_compute_xox.operators.GenerateBoards;
+import com.book1.t06_compute_xox.operators.isEndGame;
+import com.book1.t06_compute_xox.trident.func.LocalQueuerFunction;
+import com.book1.t06_compute_xox.trident.spout.LocalQueueEmitter;
+import com.book1.t06_compute_xox.trident.spout.LocalQueueSpout;
 
 import storm.trident.Stream;
 import storm.trident.TridentTopology;

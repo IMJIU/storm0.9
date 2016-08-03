@@ -1,9 +1,9 @@
-package com.book1.t04.log_kafka;
+package com.book1.t04_log_analysis.log_kafka;
 
 import java.util.Properties;
 
-import com.book1.t04.formatter.Formatter;
-import com.book1.t04.formatter.MessageFormatter;
+import com.book1.t04_log_analysis.formatter.Formatter;
+import com.book1.t04_log_analysis.formatter.MessageFormatter;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.AppenderBase;

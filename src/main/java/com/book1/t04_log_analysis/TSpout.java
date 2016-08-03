@@ -1,4 +1,4 @@
-package com.book1.t04;
+package com.book1.t04_log_analysis;
 
 import java.util.Arrays;
 
@@ -6,14 +6,14 @@ import org.mortbay.log.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.book1.t04.EWMA.Time;
-import com.book1.t04.filter.BooleanFilter;
-import com.book1.t04.func.JsonProjectFunction;
-import com.book1.t04.func.MovingAverageFunction;
-import com.book1.t04.func.PrintFunction;
-import com.book1.t04.func.ThresholdFilterFunction;
-import com.book1.t04.func.XMPPFunction;
-import com.book1.t04.msg.NotifyMessageMapper;
+import com.book1.t04_log_analysis.EWMA.Time;
+import com.book1.t04_log_analysis.filter.BooleanFilter;
+import com.book1.t04_log_analysis.func.JsonProjectFunction;
+import com.book1.t04_log_analysis.func.MovingAverageFunction;
+import com.book1.t04_log_analysis.func.PrintFunction;
+import com.book1.t04_log_analysis.func.ThresholdFilterFunction;
+import com.book1.t04_log_analysis.func.XMPPFunction;
+import com.book1.t04_log_analysis.msg.NotifyMessageMapper;
 import com.google.common.collect.ImmutableList;
 
 import backtype.storm.Config;

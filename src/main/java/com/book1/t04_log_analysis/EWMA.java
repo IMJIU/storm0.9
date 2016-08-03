@@ -1,4 +1,4 @@
-package com.book1.t04;
+package com.book1.t04_log_analysis;
 
 import java.io.Serializable;
 
@@ -6,7 +6,7 @@ import org.mortbay.log.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.book1.t04.func.MovingAverageFunction;
+import com.book1.t04_log_analysis.func.MovingAverageFunction;
 
 public class EWMA implements Serializable {
 	private static final Logger log = LoggerFactory.getLogger(EWMA.class);

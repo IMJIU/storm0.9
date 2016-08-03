@@ -1,9 +1,9 @@
-package com.book1.t05_score.operators;
+package com.book1.t06_compute_xox.operators;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.book1.t05_score.model.Board;
+import com.book1.t06_compute_xox.model.Board;
 
 import storm.trident.operation.BaseFunction;
 import storm.trident.operation.TridentCollector;

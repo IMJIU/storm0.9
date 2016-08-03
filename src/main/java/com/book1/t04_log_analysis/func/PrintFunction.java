@@ -1,10 +1,12 @@
-package com.book1.t04.func;
+package com.book1.t04_log_analysis.func;
 
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.book1.t04.msg.MessageMapper;
+
+import com.book1.t04_log_analysis.msg.MessageMapper;
+
 import storm.trident.operation.BaseFunction;
 import storm.trident.operation.TridentCollector;
 import storm.trident.operation.TridentOperationContext;

@@ -1,8 +1,8 @@
-package com.book1.t05_score.operators;
+package com.book1.t06_compute_xox.operators;
 
-import com.book1.t05_score.model.Board;
-import com.book1.t05_score.model.GameState;
-import com.book1.t05_score.model.Player;
+import com.book1.t06_compute_xox.model.Board;
+import com.book1.t06_compute_xox.model.GameState;
+import com.book1.t06_compute_xox.model.Player;
 import com.esotericsoftware.minlog.Log;
 
 import storm.trident.operation.BaseFunction;

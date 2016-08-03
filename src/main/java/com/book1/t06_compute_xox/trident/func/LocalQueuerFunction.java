@@ -1,6 +1,6 @@
-package com.book1.t05_score.trident.func;
+package com.book1.t06_compute_xox.trident.func;
 
-import com.book1.t05_score.trident.spout.LocalQueueEmitter;
+import com.book1.t06_compute_xox.trident.spout.LocalQueueEmitter;
 import com.esotericsoftware.minlog.Log;
 import storm.trident.operation.BaseFunction;
 import storm.trident.operation.TridentCollector;

@@ -1,4 +1,4 @@
-package com.book1.t05_score.topology;
+package com.book1.t06_compute_xox.topology;
 
 import backtype.storm.Config;
 import backtype.storm.LocalCluster;
@@ -9,13 +9,13 @@ import backtype.storm.utils.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.book1.t05_score.model.Board;
-import com.book1.t05_score.model.GameState;
-import com.book1.t05_score.operators.ScoreFunction;
-import com.book1.t05_score.operators.ScoreUpdater;
-import com.book1.t05_score.operators.isEndGame;
-import com.book1.t05_score.trident.spout.LocalQueueEmitter;
-import com.book1.t05_score.trident.spout.LocalQueueSpout;
+import com.book1.t06_compute_xox.model.Board;
+import com.book1.t06_compute_xox.model.GameState;
+import com.book1.t06_compute_xox.operators.ScoreFunction;
+import com.book1.t06_compute_xox.operators.ScoreUpdater;
+import com.book1.t06_compute_xox.operators.isEndGame;
+import com.book1.t06_compute_xox.trident.spout.LocalQueueEmitter;
+import com.book1.t06_compute_xox.trident.spout.LocalQueueSpout;
 
 import storm.trident.Stream;
 import storm.trident.TridentTopology;
@@ -34,6 +34,17 @@ public class ScoringTopology {
 		final LocalQueueEmitter<GameState> scoringSpoutEmitter = new LocalQueueEmitter<GameState>("ScoringQueue");
 		scoringSpoutEmitter.enqueue(exampleRecursiveState);
 		LocalQueueSpout<GameState> scoringSpout = new LocalQueueSpout<GameState>(scoringSpoutEmitter);
+		createBoard(scoringSpoutEmitter);
+		Stream inputStream = topology.newStream("scoring", scoringSpout);
+
+		inputStream.each(new Fields("gamestate"), new isEndGame())
+				.each(new Fields("gamestate"), new ScoreFunction(), new Fields("board", "score", "player"))
+				.each(new Fields("board", "score", "player"), new ScoreUpdater(), new Fields());
+		
+		return topology.build();
+	}
+
+	private static void createBoard(final LocalQueueEmitter<GameState> scoringSpoutEmitter) {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -44,12 +55,6 @@ public class ScoringTopology {
 				}
 			}
 		}).start();
-		Stream inputStream = topology.newStream("scoring", scoringSpout);
-
-		inputStream.each(new Fields("gamestate"), new isEndGame()).each(new Fields("gamestate"), new ScoreFunction(), new Fields("board", "score", "player"))
-				.each(new Fields("board", "score", "player"), new ScoreUpdater(), new Fields());
-		
-		return topology.build();
 	}
 
 	public static void main(String[] args) throws Exception {

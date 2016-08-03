@@ -1,4 +1,4 @@
-package com.book1.t05_score.model;
+package com.book1.t06_compute_xox.model;
 
 public class BestMove {
     public Board bestMove;

@@ -1,9 +1,9 @@
-package com.book1.t05_score.operators;
+package com.book1.t06_compute_xox.operators;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.book1.t05_score.model.GameState;
+import com.book1.t06_compute_xox.model.GameState;
 
 import storm.trident.operation.BaseFilter;
 import storm.trident.tuple.TridentTuple;

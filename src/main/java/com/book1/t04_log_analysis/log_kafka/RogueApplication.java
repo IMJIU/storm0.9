@@ -1,4 +1,4 @@
-package com.book1.t04.log_kafka;
+package com.book1.t04_log_analysis.log_kafka;
 
 
 import org.slf4j.Logger;

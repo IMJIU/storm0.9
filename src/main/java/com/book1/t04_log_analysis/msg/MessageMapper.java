@@ -1,4 +1,4 @@
-package com.book1.t04.msg;
+package com.book1.t04_log_analysis.msg;
 
 import java.io.Serializable;
 

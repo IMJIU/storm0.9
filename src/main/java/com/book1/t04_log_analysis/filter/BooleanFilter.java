@@ -1,4 +1,4 @@
-package com.book1.t04.filter;
+package com.book1.t04_log_analysis.filter;
 
 import org.apache.log4j.Logger;
 
