@@ -11,7 +11,6 @@ import com.metamx.common.lifecycle.Lifecycle;
 import com.metamx.druid.realtime.RealtimeNode;
 
 import backtype.storm.task.IMetricsContext;
-import io.druid.segment.realtime.RealtimeManager;
 import storm.trident.state.State;
 import storm.trident.state.StateFactory;
 

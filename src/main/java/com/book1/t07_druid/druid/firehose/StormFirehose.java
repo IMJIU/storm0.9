@@ -14,10 +14,9 @@ import org.slf4j.LoggerFactory;
 import com.book1.t07_druid.storm.model.FixMessageDto;
 import com.book1.t07_druid.storm.trident.state.DruidPartitionStatus;
 import com.google.common.collect.Maps;
-
-import io.druid.data.input.Firehose;
-import io.druid.data.input.InputRow;
-import io.druid.data.input.MapBasedInputRow;
+import com.metamx.druid.input.InputRow;
+import com.metamx.druid.input.MapBasedInputRow;
+import com.metamx.druid.realtime.firehose.Firehose;
 
 public class StormFirehose implements Firehose {
     private static final Logger LOG = LoggerFactory.getLogger(StormFirehose.class);

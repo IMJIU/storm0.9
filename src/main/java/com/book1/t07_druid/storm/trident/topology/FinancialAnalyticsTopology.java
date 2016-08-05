@@ -31,8 +31,9 @@ public class FinancialAnalyticsTopology {
     }
 
     public static void main(String[] args) throws Exception {
+    	 LOG.info("11111111111111");
         LogLevelAdjuster.register();
-
+        LOG.info("222222222222");
         final Config conf = new Config();
         final LocalCluster cluster = new LocalCluster();
 
