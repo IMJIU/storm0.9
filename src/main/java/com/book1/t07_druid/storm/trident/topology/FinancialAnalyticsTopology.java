@@ -1,13 +1,13 @@
-package com.packtpub.storm.trident.topology;
+package com.book1.t07_druid.storm.trident.topology;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-//import com.metamx.druid.log.LogLevelAdjuster;
-import com.packtpub.storm.trident.operator.MessageTypeFilter;
-import com.packtpub.storm.trident.spout.FixEventSpout;
-import com.packtpub.storm.trident.state.DruidStateFactory;
-import com.packtpub.storm.trident.state.DruidStateUpdater;
+import com.book1.t07_druid.storm.trident.operator.MessageTypeFilter;
+import com.book1.t07_druid.storm.trident.spout.FixEventSpout;
+import com.book1.t07_druid.storm.trident.state.DruidStateFactory;
+import com.book1.t07_druid.storm.trident.state.DruidStateUpdater;
+import com.metamx.druid.log.LogLevelAdjuster;
 
 import backtype.storm.Config;
 import backtype.storm.LocalCluster;

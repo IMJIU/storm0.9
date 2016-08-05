@@ -1,4 +1,4 @@
-package com.packtpub.druid.firehose;
+package com.book1.t07_druid.druid.firehose;
 
 import java.io.IOException;
 

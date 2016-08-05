@@ -1,4 +1,4 @@
-package com.packtpub.storm.trident.state;
+package com.book1.t07_druid.storm.trident.state;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;

@@ -1,13 +1,14 @@
-package com.packtpub.storm.trident.operator;
-
-import com.esotericsoftware.minlog.Log;
-import com.packtpub.storm.model.FixMessageDto;
-import storm.trident.operation.BaseFunction;
-import storm.trident.operation.TridentCollector;
-import storm.trident.tuple.TridentTuple;
+package com.book1.t07_druid.storm.trident.operator;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.book1.t07_druid.storm.model.FixMessageDto;
+import com.esotericsoftware.minlog.Log;
+
+import storm.trident.operation.BaseFunction;
+import storm.trident.operation.TridentCollector;
+import storm.trident.tuple.TridentTuple;
 
 public class PrinterFunction extends BaseFunction {
     private static final long serialVersionUID = 1L;

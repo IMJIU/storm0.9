@@ -1,13 +1,15 @@
-package com.packtpub.storm.trident.state;
-
-import com.packtpub.druid.firehose.StormFirehose;
-import com.packtpub.druid.firehose.StormFirehoseFactory;
-import com.packtpub.storm.model.FixMessageDto;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import storm.trident.state.State;
+package com.book1.t07_druid.storm.trident.state;
 
 import java.util.Vector;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.book1.t07_druid.druid.firehose.StormFirehose;
+import com.book1.t07_druid.druid.firehose.StormFirehoseFactory;
+import com.book1.t07_druid.storm.model.FixMessageDto;
+
+import storm.trident.state.State;
 
 public class DruidState implements State {
     private static final Logger LOG = LoggerFactory.getLogger(DruidState.class);

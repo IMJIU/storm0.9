@@ -1,13 +1,14 @@
-package com.packtpub.storm.trident.state;
+package com.book1.t07_druid.storm.trident.state;
 
-import com.packtpub.storm.model.FixMessageDto;
+import java.util.List;
+import java.util.Map;
+
+import com.book1.t07_druid.storm.model.FixMessageDto;
+
 import storm.trident.operation.TridentCollector;
 import storm.trident.operation.TridentOperationContext;
 import storm.trident.state.StateUpdater;
 import storm.trident.tuple.TridentTuple;
-
-import java.util.List;
-import java.util.Map;
 
 public class DruidStateUpdater implements StateUpdater<DruidState> {
     private static final long serialVersionUID = 1L;

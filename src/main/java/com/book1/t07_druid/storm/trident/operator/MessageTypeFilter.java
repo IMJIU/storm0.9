@@ -1,6 +1,7 @@
-package com.packtpub.storm.trident.operator;
+package com.book1.t07_druid.storm.trident.operator;
 
-import com.packtpub.storm.model.FixMessageDto;
+import com.book1.t07_druid.storm.model.FixMessageDto;
+
 import storm.trident.operation.BaseFilter;
 import storm.trident.tuple.TridentTuple;
 

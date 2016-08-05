@@ -1,8 +1,8 @@
-package com.packtpub.druid.firehose;
-
-import com.esotericsoftware.minlog.Log;
+package com.book1.t07_druid.druid.firehose;
 
 import java.util.List;
+
+import com.esotericsoftware.minlog.Log;
 
 public class StormCommitRunnable implements Runnable {
     private List<String> partitionIds = null;

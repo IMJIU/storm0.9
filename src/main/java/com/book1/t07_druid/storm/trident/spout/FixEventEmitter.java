@@ -1,4 +1,4 @@
-package com.packtpub.storm.trident.spout;
+package com.book1.t07_druid.storm.trident.spout;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -11,13 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.packtpub.storm.model.FixMessageDto;
+import com.book1.t07_druid.storm.model.FixMessageDto;
 
 import net.java.fixparser.SimpleFixMessage;
 import net.java.fixparser.SimpleFixParser;
 import net.java.util.IoUtils;
 import net.java.util.TagValue;
-
 import storm.trident.operation.TridentCollector;
 import storm.trident.spout.ITridentSpout.Emitter;
 import storm.trident.topology.TransactionAttempt;
