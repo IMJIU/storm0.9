@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>   
-   <appender name="KAFKA" class="com.book1.t04.log_kafka.KafkaAppender">
+   <appender name="KAFKA" class="com.book1.t04_log_analysis.log_kafka.KafkaAppender">
    		<topic>mytopic</topic>
    		<zookeeperHost>192.168.199.210:2181</zookeeperHost>   
-   		<formatter class="com.book1.t04.formatter.JsonFormatter">
+   		<formatter class="com.book1.t04_log_analysis.formatter.JsonFormatter">
    			<expectJson>false</expectJson>
    		</formatter>
   </appender>  
@@ -22,10 +22,13 @@
   <logger name="com.book1.t04.log_kafka" level="debug" additivity="false">
         <appender-ref ref="KAFKA"/>
   </logger>
-   <logger name="com.book1.t04" level="debug" additivity="false">
+   <logger name="com.book1" level="debug" additivity="false">
         <appender-ref ref="STDOUT"/>
   </logger>  
-     <logger name="com.book1.t05_score" level="debug" additivity="false">
+   <logger name="com.book1.t05_score" level="debug" additivity="false">
+        <appender-ref ref="STDOUT"/>
+  </logger>  
+     <logger name="com.book1.t07_druid" level="debug" additivity="false">
         <appender-ref ref="STDOUT"/>
   </logger>  
   

@@ -14,6 +14,7 @@ public class WordCountTopology {
 	private static final String TOPOLOGY_NAME = "word-count-topology";
 	
 	public static void main(String[] args) {
+		System.out.println("ok");
 		SentenceSpout spout = new SentenceSpout();
 		SplitSentenceBolt splitBolt = new SplitSentenceBolt();
 		WordCountBolt countBolt = new WordCountBolt();
