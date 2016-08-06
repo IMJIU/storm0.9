@@ -1,4 +1,4 @@
-package com.book1.t08.storm.trident.topology;
+package com.book1.t08_bak.storm.trident.topology;
 
 import java.io.IOException;
 
@@ -9,12 +9,12 @@ import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.book1.t08.storm.trident.operator.PersistenceFunction;
-import com.book1.t08.storm.trident.operator.TweetSplitterFunction;
-import com.book1.t08.storm.trident.operator.WordFrequencyFunction;
-import com.book1.t08.storm.trident.state.DruidStateFactory;
-import com.book1.t08.storm.trident.state.DruidStateUpdater;
-import com.book1.t08.twitter.TwitterSpout;
+import com.book1.t08_bak.storm.trident.operator.PersistenceFunction;
+import com.book1.t08_bak.storm.trident.operator.TweetSplitterFunction;
+import com.book1.t08_bak.storm.trident.operator.WordFrequencyFunction;
+import com.book1.t08_bak.storm.trident.state.DruidStateFactory;
+import com.book1.t08_bak.storm.trident.state.DruidStateUpdater;
+import com.book1.t08_bak.twitter.TwitterSpout;
 
 //import com.packtpub.storm.trident.operator.PersistenceFunction;
 //import com.packtpub.storm.trident.operator.TweetSplitterFunction;

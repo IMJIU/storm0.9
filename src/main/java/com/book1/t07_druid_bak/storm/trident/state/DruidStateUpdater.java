@@ -1,17 +1,21 @@
-package com.packtpub.storm.trident.state;
+package com.book1.t07_druid_bak.storm.trident.state;
 
-import com.packtpub.storm.model.FixMessageDto;
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.book1.t07_druid_bak.storm.model.FixMessageDto;
+
 import storm.trident.operation.TridentCollector;
 import storm.trident.operation.TridentOperationContext;
 import storm.trident.state.StateUpdater;
 import storm.trident.tuple.TridentTuple;
 
-import java.util.List;
-import java.util.Map;
-
 public class DruidStateUpdater implements StateUpdater<DruidState> {
     private static final long serialVersionUID = 1L;
-//    private static final Logger LOG = LoggerFactory.getLogger(DruidStateUpdater.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DruidStateUpdater.class);
 
     @SuppressWarnings("rawtypes")
     @Override

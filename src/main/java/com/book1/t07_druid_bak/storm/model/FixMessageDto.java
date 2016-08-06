@@ -1,4 +1,4 @@
-package com.packtpub.storm.model;
+package com.book1.t07_druid_bak.storm.model;
 
 import java.io.Serializable;
 

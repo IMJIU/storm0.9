@@ -1,4 +1,4 @@
-package com.book1.t08.druid.firehose;
+package com.book1.t08_bak.druid.firehose;
 
 import com.esotericsoftware.minlog.Log;
 

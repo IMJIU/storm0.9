@@ -1,7 +1,8 @@
-package com.packtpub.storm.trident.operator;
+package com.book1.t07_druid_bak.storm.trident.operator;
 
+import com.book1.t07_druid_bak.storm.model.FixMessageDto;
 import com.esotericsoftware.minlog.Log;
-import com.packtpub.storm.model.FixMessageDto;
+
 import storm.trident.operation.BaseFunction;
 import storm.trident.operation.TridentCollector;
 import storm.trident.tuple.TridentTuple;

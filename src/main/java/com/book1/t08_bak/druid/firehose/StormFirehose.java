@@ -1,4 +1,4 @@
-package com.book1.t08.druid.firehose;
+package com.book1.t08_bak.druid.firehose;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.concurrent.BlockingQueue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.book1.t08.storm.trident.state.DruidBatchStatus;
+import com.book1.t08_bak.storm.trident.state.DruidBatchStatus;
 import com.google.common.collect.Maps;
 import com.metamx.druid.input.InputRow;
 import com.metamx.druid.input.MapBasedInputRow;

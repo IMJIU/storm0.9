@@ -1,4 +1,4 @@
-package com.packtpub.storm.trident.spout;
+package com.book1.t07_druid_bak.storm.trident.spout;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.packtpub.storm.model.FixMessageDto;
+import com.book1.t07_druid_bak.storm.model.FixMessageDto;
 
 import net.java.fixparser.SimpleFixMessage;
 import net.java.fixparser.SimpleFixParser;
@@ -31,7 +31,7 @@ public class FixEventEmitter implements Emitter<Long>, Serializable {
     @Override
     public void emitBatch(TransactionAttempt tx, Long coordinatorMeta, TridentCollector collector) {
         InputStream inputStream = null;
-        File file = new File("fix_data.txt");
+        File file = new File("d:\\fix_data.txt");
         try {
             inputStream = new BufferedInputStream(new FileInputStream(file));
             SimpleFixParser parser = new SimpleFixParser(inputStream);

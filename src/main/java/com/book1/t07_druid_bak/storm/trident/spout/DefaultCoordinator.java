@@ -1,4 +1,4 @@
-package com.packtpub.storm.trident.spout;
+package com.book1.t07_druid_bak.storm.trident.spout;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

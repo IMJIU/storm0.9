@@ -1,4 +1,4 @@
-package com.packtpub.druid.firehose;
+package com.book1.t07_druid_bak.druid.firehose;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,16 +11,16 @@ import java.util.concurrent.BlockingQueue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.book1.t07_druid_bak.storm.model.FixMessageDto;
+import com.book1.t07_druid_bak.storm.trident.state.DruidPartitionStatus;
 import com.google.common.collect.Maps;
-//import com.metamx.druid.input.InputRow;
-//import com.metamx.druid.input.MapBasedInputRow;
-//import com.metamx.druid.realtime.firehose.Firehose;
-import com.packtpub.storm.model.FixMessageDto;
-import com.packtpub.storm.trident.state.DruidPartitionStatus;
+import com.metamx.druid.input.InputRow;
+import com.metamx.druid.input.MapBasedInputRow;
+import com.metamx.druid.realtime.firehose.Firehose;
 
-import io.druid.data.input.Firehose;
-import io.druid.data.input.InputRow;
-import io.druid.data.input.MapBasedInputRow;
+//import io.druid.data.input.Firehose;
+//import io.druid.data.input.InputRow;
+//import io.druid.data.input.MapBasedInputRow;
 
 public class StormFirehose implements Firehose {
     private static final Logger LOG = LoggerFactory.getLogger(StormFirehose.class);

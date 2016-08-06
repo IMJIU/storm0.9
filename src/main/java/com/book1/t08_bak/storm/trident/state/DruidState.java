@@ -1,4 +1,4 @@
-package com.book1.t08.storm.trident.state;
+package com.book1.t08_bak.storm.trident.state;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.book1.t08.druid.firehose.StormFirehose;
-import com.book1.t08.druid.firehose.StormFirehoseFactory;
+import com.book1.t08_bak.druid.firehose.StormFirehose;
+import com.book1.t08_bak.druid.firehose.StormFirehoseFactory;
 
 //import com.packtpub.druid.firehose.StormFirehose;
 //import com.packtpub.druid.firehose.StormFirehoseFactory;
