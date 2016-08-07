@@ -14,13 +14,9 @@ import org.slf4j.LoggerFactory;
 import com.book1.t07_druid.storm.model.FixMessageDto;
 import com.book1.t07_druid.storm.trident.state.DruidPartitionStatus;
 import com.google.common.collect.Maps;
-import com.metamx.druid.input.InputRow;
-import com.metamx.druid.input.MapBasedInputRow;
-import com.metamx.druid.realtime.firehose.Firehose;
-
-//import io.druid.data.input.Firehose;
-//import io.druid.data.input.InputRow;
-//import io.druid.data.input.MapBasedInputRow;
+import io.druid.data.input.Firehose;
+import io.druid.data.input.InputRow;
+import io.druid.data.input.MapBasedInputRow;
 
 public class StormFirehose implements Firehose {
     private static final Logger LOG = LoggerFactory.getLogger(StormFirehose.class);
@@ -71,7 +67,9 @@ public class StormFirehose implements Firehose {
         final LinkedList<String> dimensions = new LinkedList<String>();
         dimensions.add("symbol");
         dimensions.add("price");
-        return new MapBasedInputRow(System.currentTimeMillis(), dimensions, theMap);
+//        return new MapBasedInputRow(System.currentTimeMillis(), dimensions, theMap);
+//        return new MapBasedInputRow(System.currentTimeMillis(), dimensions, theMap);
+        return null;
     }
 
     @Override

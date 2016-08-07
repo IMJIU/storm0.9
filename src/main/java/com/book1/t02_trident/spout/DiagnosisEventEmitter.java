@@ -7,6 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import com.book1.t02_trident.model.DiagnosisEvent;
 
+import backtype.storm.utils.Utils;
 import storm.trident.operation.TridentCollector;
 import storm.trident.spout.ITridentSpout.Emitter;
 import storm.trident.topology.TransactionAttempt;
@@ -17,7 +18,8 @@ public class DiagnosisEventEmitter implements Emitter<Long>, Serializable {
 
     @Override
     public void emitBatch(TransactionAttempt tx, Long coordinatorMeta, TridentCollector collector) {
-        for (int i = 0; i < 10000; i++) {
+    	int i= 0;
+        while((i++)<1000){
             List<Object> events = new ArrayList<Object>();
             double lat = new Double(-30 + (int) (Math.random() * 75));
             double lng = new Double(-120 + (int) (Math.random() * 70));

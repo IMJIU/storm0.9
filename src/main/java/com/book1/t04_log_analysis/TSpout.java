@@ -92,8 +92,7 @@ public class TSpout {
 		parsedStream = parsedStream.project(jsonFields);
 		log.debug("averageStream.....");
 		EWMA ewma = new EWMA().sliding(1.0, Time.MINUTES).withAlpha(EWMA.ONE_MINUTE_ALPHA);
-		Stream averageStream = parsedStream.each(new Fields("timestamp"), new MovingAverageFunction(ewma, Time.MINUTES),
-				new Fields("average"));
+		Stream averageStream = parsedStream.each(new Fields("timestamp"), new MovingAverageFunction(ewma, Time.MINUTES),new Fields("average"));
 		log.debug("thresholdStream.....");
 		Stream thresholdStream = averageStream.each(new Fields("average"), new ThresholdFilterFunction(50d), new Fields("change", "threshold"));
 		log.debug("filteredStream.....");

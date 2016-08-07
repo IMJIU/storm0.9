@@ -20,6 +20,7 @@ public class FinancialAnalyticsTopology {
     private static final Logger LOG = LoggerFactory.getLogger(FinancialAnalyticsTopology.class);
 
     public static StormTopology buildTopology() {
+    	 LOG.info("Building topology.。。。。。。。。。。。。。。。。。。。。。。。。。。。。。");
         LOG.info("Building topology.");
         TridentTopology topology = new TridentTopology();
         FixEventSpout spout = new FixEventSpout();
@@ -31,12 +32,15 @@ public class FinancialAnalyticsTopology {
     }
 
     public static void main(String[] args) throws Exception {
-        LogLevelAdjuster.register();
+        LOG.info("coming......");
+
+//        LogLevelAdjuster.register();
+        LOG.info("coming2......");
 
         final Config conf = new Config();
         final LocalCluster cluster = new LocalCluster();
 
-        LOG.info("Submitting topology.");
+        LOG.info("Submitting topology.............");
 
         cluster.submitTopology("financial", conf, buildTopology());
         LOG.info("Topology submitted.");

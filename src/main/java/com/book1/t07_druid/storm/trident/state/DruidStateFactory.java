@@ -8,10 +8,10 @@ import org.slf4j.LoggerFactory;
 import com.book1.t07_druid.druid.firehose.StormFirehoseFactory;
 import com.fasterxml.jackson.databind.jsontype.NamedType;
 import com.metamx.common.lifecycle.Lifecycle;
-import com.metamx.druid.realtime.RealtimeNode;
+//import com.metamx.druid.realtime.RealtimeNode;
 
 import backtype.storm.task.IMetricsContext;
-//import io.druid.segment.realtime.RealtimeManager;
+import io.druid.segment.realtime.RealtimeManager;
 import storm.trident.state.State;
 import storm.trident.state.StateFactory;
 
@@ -19,8 +19,8 @@ import storm.trident.state.StateFactory;
 public class DruidStateFactory implements StateFactory {
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOG = LoggerFactory.getLogger(DruidStateFactory.class);
-	private static RealtimeNode rn = null;
-
+//	private static RealtimeNode rn = null;
+	private static RealtimeManager rn;
 	private static synchronized void startRealtime() {
 		if (rn == null) {
 			final Lifecycle lifecycle = new Lifecycle();
