@@ -12,6 +12,10 @@ public class OutbreakTrendFactory implements StateFactory {
 
     @Override
     public State makeState(Map conf, IMetricsContext metrics, int partitionIndex, int numPartitions) {
+//    	System.out.println(conf);
+//    	System.out.println(metrics);
+//    	System.out.println(partitionIndex);
+//    	System.out.println(numPartitions);
         return new OutbreakTrendState(new OutbreakTrendBackingMap());
     }
 }

@@ -32,7 +32,7 @@ public class OutbreakTrendBackingMap implements IBackingMap<Long> {
     @Override
     public void multiPut(List<List<Object>> keys, List<Long> vals) {
         for (int i = 0; i < keys.size(); i++) {
-            LOG.info("Persisting [" + keys.get(i).get(0) + "] ==> [" + vals.get(i) + "]");
+            System.out.println("Persisting [" + keys.get(i).get(0) + "] ==> [" + vals.get(i) + "]");
             storage.put((String) keys.get(i).get(0), vals.get(i));
         }
     }
