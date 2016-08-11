@@ -28,7 +28,9 @@
    <logger name="com.book1.t07_druid" level="debug" additivity="false">
         <appender-ref ref="STDOUT"/>
   </logger>  
-  
+    <logger name="com.book2" level="debug" additivity="false">
+        <appender-ref ref="STDOUT"/>
+  </logger>  
   <root level="error">             
     <appender-ref ref="STDOUT" />   
   </root>     
