@@ -13,6 +13,12 @@
   </properties>
   
   <dependencies>
+  <!-- https://mvnrepository.com/artifact/org.apache.storm/storm-hdfs -->
+<dependency>
+    <groupId>org.apache.storm</groupId>
+    <artifactId>storm-hdfs</artifactId> 
+    <version>0.9.3</version>
+</dependency>
   
   
 <!--
