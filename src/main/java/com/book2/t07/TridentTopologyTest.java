@@ -2,11 +2,9 @@ package com.book2.t07;
 
 import java.net.InetSocketAddress;
 
-import org.apache.tinkerpop.shaded.minlog.Log;
+import org.apache.storm.redis.trident.state.RedisState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.book1.t02_trident.operator.DispatchAlert;
 
 import backtype.storm.Config;
 import backtype.storm.LocalCluster;
@@ -17,7 +15,6 @@ import backtype.storm.generated.StormTopology;
 import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Values;
 import backtype.storm.utils.Utils;
-import storm.trident.TridentState;
 import storm.trident.TridentTopology;
 import storm.trident.operation.BaseFunction;
 import storm.trident.operation.TridentCollector;
@@ -54,8 +51,8 @@ public class TridentTopologyTest {
 	private static StormTopology getTopology(FixedBatchSpout spout) {
 		TridentTopology topology = new TridentTopology();
 		StateFactory memState = new MemoryMapState.Factory();
-		// StateFactory dbstate = RedisState.transactional(new
-		// InetSocketAddress("192.168.xxx",6379));
+		 StateFactory dbstate = storm.state.RedisState.transactional(new InetSocketAddress("192.168.72.128",6379));
+		
 		topology.newStream("userstat", spout).shuffle()
 				.each(new Fields("track"), new TrackSplit(), new Fields("userId","url","btnPosition"))
 				.groupBy(new Fields("userId"))
@@ -92,10 +89,10 @@ public class TridentTopologyTest {
 }
 
 class TrackSplit extends BaseFunction {
-
+	private static Logger log = LoggerFactory.getLogger(TrackSplit.class);
 	@Override
 	public void execute(TridentTuple tuple, TridentCollector collector) {
-		Log.debug("tuple:{}", tuple.getString(0));
+		log.debug("tuple:{}", tuple.getString(0));
 		String sentence = (String) tuple.getValue(0);
 		if (sentence != null) {
 			String[] items = (sentence + "\n").split(" ");

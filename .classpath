@@ -24,9 +24,8 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/fixparser-0.7.3.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/logback-classic-1.0.6.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/logback-core-1.0.6.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/fixparser-0.7.3.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
