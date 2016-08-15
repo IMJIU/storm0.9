@@ -2,7 +2,6 @@ package com.book2.t07;
 
 import java.net.InetSocketAddress;
 
-import org.apache.storm.redis.trident.state.RedisState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
