@@ -11,7 +11,7 @@ import backtype.storm.tuple.Tuple;
 
 public class LogStatBolt extends BaseRichBolt {
 	private OutputCollector _collector;
-	private Map<String, Long> srcpay;
+	public static Map<String, Long> srcpay;
 
 	@Override
 	public void prepare(Map stormConf, TopologyContext context, OutputCollector collector) {

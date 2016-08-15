@@ -1,5 +1,7 @@
 package com.book3.t03;
 
+import com.book3.t01.LogWriter;
+
 import backtype.storm.Config;
 import backtype.storm.LocalCluster;
 import backtype.storm.StormSubmitter;
@@ -40,7 +42,15 @@ public class Topology {
 				e.printStackTrace();
 			}
 		}
-		Utils.sleep(200000);
+		while (true) {
+			if (LogStatBolt.srcpay != null)
+				for (String key : LogStatBolt.srcpay.keySet()) {
+					System.out.print(" " + key + ":" + LogStatBolt.srcpay.get(key));
+				}
+			System.out.println();
+			Utils.sleep(1000);
+		}
+//		Utils.sleep(10000);
 	}
 }
 

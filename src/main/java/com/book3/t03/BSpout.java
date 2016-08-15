@@ -1,6 +1,7 @@
 package com.book3.t03;
 
 import java.util.Map;
+import java.util.Random;
 
 import backtype.storm.spout.SpoutOutputCollector;
 import backtype.storm.task.TopologyContext;
@@ -14,6 +15,7 @@ class BSpout extends BaseRichSpout {
 	private String[] _users = { "a", "b", "c", "d", "e" };
 	private String[] _pays = { "100", "200", "300", "400", "200" };
 	private int _count = 5;
+	private Random r = new Random();
 
 	@Override
 	public void open(Map conf, TopologyContext context, SpoutOutputCollector collector) {
@@ -25,7 +27,7 @@ class BSpout extends BaseRichSpout {
 		try {
 			for (int i = 0; i < _count; i++) {
 				Thread.sleep(1000);
-				_collector.emit("business", new Values(System.currentTimeMillis(), _users[i], _pays[i]));
+				_collector.emit("business", new Values(System.currentTimeMillis(), _users[r.nextInt(_count)], _pays[r.nextInt(_count)]));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
