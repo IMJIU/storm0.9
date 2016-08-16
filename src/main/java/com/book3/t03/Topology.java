@@ -27,10 +27,10 @@ public class Topology {
 
 		Config conf = new Config();
 		// 实时计算不需要可靠消息，故关闭acker节省通信资源
-//		conf.setNumAckers(0);
+		conf.setNumAckers(0);
 		// 一般设置为spout和bolt总task数量相等或更多
 		// 以免多task集中在一个jvm里运行
-//		conf.setNumWorkers(7);
+		conf.setNumWorkers(7);
 		if (args.length == 0) {
 			LocalCluster cluster = new LocalCluster();
 			cluster.submitTopology("t03", conf, builder.createTopology());
