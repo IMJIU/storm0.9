@@ -1,5 +1,9 @@
 package com.kafka_log_analysis;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import backtype.storm.Config;
@@ -9,7 +13,9 @@ import backtype.storm.generated.AlreadyAliveException;
 import backtype.storm.generated.InvalidTopologyException;
 import backtype.storm.task.TopologyContext;
 import backtype.storm.tuple.Fields;
+import backtype.storm.tuple.Values;
 import backtype.storm.utils.Utils;
+import redis.clients.jedis.Jedis;
 import storm.kafka.Broker;
 import storm.kafka.KeyValueSchemeAsMultiScheme;
 import storm.kafka.StaticHosts;
@@ -21,35 +27,88 @@ import storm.trident.Stream;
 import storm.trident.TridentTopology;
 import storm.trident.operation.BaseFunction;
 import storm.trident.operation.TridentCollector;
-import storm.trident.spout.ITridentSpout;
-import storm.trident.spout.ITridentSpout.BatchCoordinator;
-import storm.trident.spout.ITridentSpout.Emitter;
 import storm.trident.tuple.TridentTuple;
 
 public class AnalysisTopology {
+	public static final String brokerHost = "192.168.199.210";
+	public static final String token = "|@@|";
+	public static final String tokenEscap = "\\|@@\\|";
 	
+	public static final String IP_LOG_ID = "IP:LOG:ID";
+	public static final String IP_LOG = "IP:LOG:";
+	public static final String METHOD_LOG = "METHOD:LOG";
+	public static final String METHOD_LOG_ID = "METHOD:LOG:ID";
+	public static final DateFormat df = new SimpleDateFormat("yyyyMMdd");
+
+	private static final Jedis jedis = new Jedis(brokerHost, 6379);
+
+	// public static String broker="192.168.72.128";
 	public static void main(String[] args) {
 		Config conf = new Config();
 		TridentTopology topology = new TridentTopology();
 		GlobalPartitionInformation info = new GlobalPartitionInformation();
-		info.addPartition(0, new Broker("192.168.72.128", 9092));
+		info.addPartition(0, new Broker(brokerHost, 9092));
 		StaticHosts kafkaHosts = new StaticHosts(info);
 
 		TridentKafkaConfig spoutConf = new TridentKafkaConfig(kafkaHosts, "log");
 		spoutConf.scheme = new KeyValueSchemeAsMultiScheme(new StringKeyValueScheme());
 		spoutConf.forceFromStart = true;
-		spoutConf.startOffsetTime = -2;//-1最后一条记录开始  -2.从新开始
+		spoutConf.startOffsetTime = -2;// -1最后一条记录开始 -2.从新开始
 		OpaqueTridentKafkaSpout spout = new OpaqueTridentKafkaSpout(spoutConf);
 
 		Stream spoutStream = topology.newStream("kafka-stream", spout);
 		spoutStream.each(new Fields("str"), new BaseFunction() {
-			
+
 			@Override
 			public void execute(TridentTuple tuple, TridentCollector collector) {
 				String str = tuple.getString(0);
 				System.out.println(str);
-				if(str.indexOf("|@@|")>0){
-					
+				if (str.indexOf(token) > 0) {
+					String[] arr = str.split(tokenEscap);
+					String ip = arr[0];
+					String method = arr[3];
+					String date = arr[1].substring(0, 10).replaceAll("-", "");
+					String hour = arr[1].substring(11, 13);
+					Values values = new Values();
+					values.add(ip);
+					values.add(method);
+					values.add(date);
+					values.add(hour);
+					collector.emit(values);
+				}
+			}
+		}, new Fields("ip","method","date","hour"))
+		.each( new Fields("ip","method","date","hour"), new  BaseFunction() {
+			
+			@Override
+			public void execute(TridentTuple tuple, TridentCollector collector) {
+				System.out.println(tuple.get(0));
+				String ip = tuple.getString(0);
+				String method = tuple.getString(1);
+				String date = tuple.getString(2);
+				String hour = tuple.getString(3);
+				String key = IP_LOG + ip + "-"+date + "-" + hour;
+				String count = jedis.hget(key, "count");
+				
+				String key2 = METHOD_LOG + method +"-"+ date + "-" + hour;
+				String count2 = jedis.hget(key, "count");
+				
+				if(count == null){
+//					System.out.println("ip null key:"+key);
+					jedis.hset(key, "count", "1");
+					jedis.lpush(IP_LOG_ID, key);
+				}else{
+//					System.out.println("ip key:"+key);
+					jedis.hset(key, "count", String.valueOf(Integer.parseInt(count)+1));
+				}
+				
+				if(count2 == null){
+//					System.out.println("method null key:"+key);
+					jedis.hset(key2, "count", "1");
+					jedis.lpush(METHOD_LOG_ID, key2);
+				}else{
+//					System.out.println("method key:"+key);
+					jedis.hset(key2, "count", String.valueOf(Integer.parseInt(count2)+1));
 				}
 			}
 		},new Fields(""));
