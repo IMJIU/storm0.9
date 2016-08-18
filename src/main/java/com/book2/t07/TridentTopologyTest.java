@@ -27,11 +27,13 @@ public class TridentTopologyTest {
 	private static Logger log = LoggerFactory.getLogger(TridentTopologyTest.class);
 
 	public static void main(String[] args) {
-		FixedBatchSpout spout = new FixedBatchSpout(new Fields("track"), 2, new Values("101 item.com/item/200001 fav"),
-				new Values("102 xxx.com/item/200002 addcart"), new Values("102 xxx.com/item/200002 addcart"));
+		FixedBatchSpout spout = new FixedBatchSpout(new Fields("track"), 2, 
+				new Values("101 item.com/item/200001 fav"),
+				new Values("102 xxx.com/item/200002 addcart"), 
+				new Values("102 xxx.com/item/200002 addcart"));
 		spout.setCycle(true);
 
-		StormTopology t = getTopology2(spout);
+		StormTopology t = getTopology(spout);
 		Config conf = new Config();
 		if (args.length == 0) {
 			LocalCluster cluster = new LocalCluster();
@@ -55,8 +57,10 @@ public class TridentTopologyTest {
 		topology.newStream("userstat", spout).shuffle()
 				.each(new Fields("track"), new TrackSplit(), new Fields("userId","url","btnPosition"))
 				.groupBy(new Fields("userId"))
-				.persistentAggregate(new MemoryMapState.Factory(), new Count(), new Fields("agg_users"))
-				.parallelismHint(2).newValuesStream().each(new Fields("userId", "agg_users"), new BaseFunction() {
+				.persistentAggregate(memState, new Count(), new Fields("agg_users"))
+				.parallelismHint(2)
+				.newValuesStream()
+				.each(new Fields("userId", "agg_users"), new BaseFunction() {
 					public void execute(TridentTuple tuple, TridentCollector collector) {
 						log.info("{}-{}", tuple.get(0).toString(), tuple.get(1));
 					}
@@ -87,19 +91,19 @@ public class TridentTopologyTest {
 	}
 }
 
-class TrackSplit extends BaseFunction {
-	private static Logger log = LoggerFactory.getLogger(TrackSplit.class);
-	@Override
-	public void execute(TridentTuple tuple, TridentCollector collector) {
-		log.debug("tuple:{}", tuple.getString(0));
-		String sentence = (String) tuple.getValue(0);
-		if (sentence != null) {
-			String[] items = (sentence + "\n").split(" ");
-			String userId = items[0];
-			String url = items[1];
-			String buttonPosition = items[2];
-			collector.emit(new Values(userId, url, buttonPosition));
-		}
-	}
-
-}
+//class TrackSplit extends BaseFunction {
+//	private static Logger log = LoggerFactory.getLogger(TrackSplit.class);
+//	@Override
+//	public void execute(TridentTuple tuple, TridentCollector collector) {
+////		log.debug("tuple:{}", tuple.getString(0));
+//		String sentence = (String) tuple.getValue(0);
+//		if (sentence != null) {
+//			String[] items = (sentence + "\n").split(" ");
+//			String userId = items[0];
+//			String url = items[1];
+//			String buttonPosition = items[2];
+//			collector.emit(new Values(userId, url, buttonPosition));
+//		}
+//	}
+//
+//}

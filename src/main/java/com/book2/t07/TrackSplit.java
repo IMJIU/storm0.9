@@ -9,11 +9,11 @@ import storm.trident.operation.TridentCollector;
 import storm.trident.tuple.TridentTuple;
 
 public class TrackSplit extends BaseFunction {
-	private static Logger log = LoggerFactory.getLogger(DRPCTopologyTest.class);
+	private static Logger log = LoggerFactory.getLogger(TrackSplit.class);
 
 	@Override
 	public void execute(TridentTuple tuple, TridentCollector collector) {
-		log.debug("tuple:{}", tuple.getString(0));
+//		log.debug("tuple:{}", tuple.getString(0));
 		String sentence = (String) tuple.getValue(0);
 		if (sentence != null) {
 			String[] items = (sentence + "\n").split(" ");
