@@ -34,14 +34,19 @@ public class AnalysisTopology {
 	public static final String token = "|@@|";
 	public static final String tokenEscap = "\\|@@\\|";
 	
-	public static final String IP_LOG_ID = "IP:LOG:ID";
+	public static final String COUNT = "count";
 	public static final String IP_LOG = "IP:LOG:";
-	public static final String METHOD_LOG = "METHOD:LOG";
-	public static final String METHOD_LOG_ID = "METHOD:LOG:ID";
+	public static final String METHOD_LOG = "METHOD:LOG:";
+	
+	public static final String METHOD_LOG_DATE_ID = "METHOD:LOG:DATE:ID";
+	public static final String METHOD_LOG_DATE = "METHOD:LOG:DATE:";
+	public static final String IP_LOG_DATE_ID = "IP:LOG:DATE:ID";
+	public static final String IP_LOG_DATE = "IP:LOG:DATE:";
+	 
 	public static final DateFormat df = new SimpleDateFormat("yyyyMMdd");
 
 	private static final Jedis jedis = new Jedis(brokerHost, 6379);
-
+	private static final JedisProxy proxy = new JedisProxy(jedis);
 	// public static String broker="192.168.72.128";
 	public static void main(String[] args) {
 		Config conf = new Config();
@@ -88,28 +93,26 @@ public class AnalysisTopology {
 				String date = tuple.getString(2);
 				String hour = tuple.getString(3);
 				String key = IP_LOG + ip + "-"+date + "-" + hour;
-				String count = jedis.hget(key, "count");
+				String count = jedis.hget(key, COUNT);
 				
 				String key2 = METHOD_LOG + method +"-"+ date + "-" + hour;
-				String count2 = jedis.hget(key, "count");
+				String count2 = jedis.hget(key, COUNT);
 				
 				if(count == null){
-//					System.out.println("ip null key:"+key);
-					jedis.hset(key, "count", "1");
-					jedis.lpush(IP_LOG_ID, key);
+					jedis.hset(key, COUNT, "1");
 				}else{
-//					System.out.println("ip key:"+key);
-					jedis.hset(key, "count", String.valueOf(Integer.parseInt(count)+1));
+					jedis.hset(key, COUNT, String.valueOf(Integer.parseInt(count)+1));
 				}
+				jedis.lpush(IP_LOG+date, key);
+				proxy.lgetOrPush(IP_LOG_DATE_ID, IP_LOG_DATE+date);
 				
 				if(count2 == null){
-//					System.out.println("method null key:"+key);
-					jedis.hset(key2, "count", "1");
-					jedis.lpush(METHOD_LOG_ID, key2);
+					jedis.hset(key2, COUNT, "1");
 				}else{
-//					System.out.println("method key:"+key);
-					jedis.hset(key2, "count", String.valueOf(Integer.parseInt(count2)+1));
+					jedis.hset(key2, COUNT, String.valueOf(Integer.parseInt(count2)+1));
 				}
+				jedis.lpush(METHOD_LOG_DATE+date, key2);
+				proxy.lgetOrPush(METHOD_LOG_DATE_ID, METHOD_LOG_DATE+date);
 			}
 		},new Fields(""));
 		if (args.length == 0) {
