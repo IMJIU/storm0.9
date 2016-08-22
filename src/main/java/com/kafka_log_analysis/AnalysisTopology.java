@@ -36,8 +36,7 @@ public class AnalysisTopology {
 	
 	public static final DateFormat df = new SimpleDateFormat("yyyyMMdd");
 
-	private static final Jedis jedis = new Jedis(brokerHost, 6379);
-	private static final JedisProxy proxy = new JedisProxy(jedis);
+	private static LogStatistic logStatistic = new LogStatistic();
 	// public static String broker="192.168.72.128";
 	public static void main(String[] args) {
 		Config conf = new Config();
@@ -83,39 +82,7 @@ public class AnalysisTopology {
 				String method = tuple.getString(1);
 				String date = tuple.getString(2);
 				String hour = tuple.getString(3);
-				String key = TaleConstants.IP_LOG + ip + "-"+date + "-" + hour;
-				String count = jedis.hget(key, TaleConstants.COUNT);
-				
-//				String key2 = TaleConstants.METHOD_LOG + method +"-"+ date + "-" + hour;
-//				String count2 = jedis.hget(key, TaleConstants.COUNT);
-				
-				if(count == null){
-					Map<String,String>map = new HashMap<>();
-					map.put(TaleConstants.COUNT, "1");
-					map.put("date", date);
-					map.put("hour", hour);
-					map.put("ip", ip);
-					map.put("method", method);
-					jedis.hmset(key, map);
-				}else{
-					jedis.hset(key, TaleConstants.COUNT, String.valueOf(Integer.parseInt(count)+1));
-				}
-				jedis.lpush(TaleConstants.IP_LOG+date, key);
-				proxy.lgetOrPush(TaleConstants.IP_LOG_DATE_ID, TaleConstants.IP_LOG_DATE+date);
-				
-//				if(count2 == null){
-//					Map<String,String>map = new HashMap<>();
-//					map.put(TaleConstants.COUNT, "1");
-//					map.put("date", date);
-//					map.put("hour", hour);
-//					map.put("ip", ip);
-//					map.put("method", method);
-//					jedis.hmset(key2,map);
-//				}else{
-//					jedis.hset(key2, TaleConstants.COUNT, String.valueOf(Integer.parseInt(count2)+1));
-//				}
-//				jedis.lpush(TaleConstants.METHOD_LOG_DATE+date, key2);
-//				proxy.lgetOrPush(TaleConstants.METHOD_LOG_DATE_ID, TaleConstants.METHOD_LOG_DATE+date);
+				logStatistic.add(ip,method,date,hour);
 			}
 		},new Fields(""));
 		if (args.length == 0) {
