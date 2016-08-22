@@ -77,7 +77,6 @@ public class AnalysisTopology {
 			
 			@Override
 			public void execute(TridentTuple tuple, TridentCollector collector) {
-				System.out.println(tuple.get(0));
 				String ip = tuple.getString(0);
 				String method = tuple.getString(1);
 				String date = tuple.getString(2);

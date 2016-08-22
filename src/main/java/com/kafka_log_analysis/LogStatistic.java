@@ -26,7 +26,6 @@ public class LogStatistic {
 		}
 		jedis.lpush(TaleConstants.IP_LOG + date, key);
 		lpushIfNotExist(TaleConstants.IP_LOG_DATE_ID, TaleConstants.IP_LOG_DATE + date);
-
 	}
 
 
