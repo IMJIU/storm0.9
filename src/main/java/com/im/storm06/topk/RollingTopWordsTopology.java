@@ -13,7 +13,7 @@ import backtype.storm.testing.TestWordSpout;
 import backtype.storm.topology.TopologyBuilder;
 import backtype.storm.tuple.Fields;
 
-public class RollingTopWords {
+public class RollingTopWordsTopology {
 
 	private static final int DEFAULT_RUNTIME_IN_SECONDS = 60;
 
@@ -27,7 +27,7 @@ public class RollingTopWords {
 
 	private final int runtimeInSeconds;
 
-	public RollingTopWords() throws Exception {
+	public RollingTopWordsTopology() throws Exception {
 		builder = new TopologyBuilder();
 		topologyName = "slidingWindowCounts";
 		topologyConfig = createTopologyConfiguration();
@@ -54,7 +54,7 @@ public class RollingTopWords {
 	}
 
 	public static void main(String[] args) throws Exception {
-		new RollingTopWords().run();
+		new RollingTopWordsTopology().run();
 	}
 
 	private void run() throws InterruptedException {

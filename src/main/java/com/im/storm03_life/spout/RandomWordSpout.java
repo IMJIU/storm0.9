@@ -5,6 +5,10 @@ import java.util.Random;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.im.storm03_life.bolt.WriterBolt;
 
 import backtype.storm.spout.SpoutOutputCollector;
 import backtype.storm.task.TopologyContext;
@@ -22,8 +26,8 @@ public class RandomWordSpout extends BaseRichSpout {
 
 	private static final long serialVersionUID = -4287209449750623371L;
 	
-	private static final Log log = LogFactory.getLog(RandomWordSpout.class);
-
+	private static final Logger log = LoggerFactory.getLogger(RandomWordSpout.class);
+	
 	private SpoutOutputCollector collector;
 	
 	private String[] words = new String[]{"storm", "hadoop", "hive", "flume"};

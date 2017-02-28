@@ -2,7 +2,7 @@
 <configuration>   
 <!---->    <appender name="KAFKA" class="com.book1.t04_log_analysis.log_kafka.KafkaAppender">
    		<topic>mytopic</topic>
-   		<zookeeperHost>192.168.199.100:2181</zookeeperHost>   
+   		<zookeeperHost>localhost:2181</zookeeperHost>   
    		<formatter class="com.book1.t04_log_analysis.formatter.JsonFormatter">
    			<expectJson>false</expectJson>
    		</formatter>
@@ -31,6 +31,9 @@
     <logger name="com.book2" level="debug" additivity="false">
         <appender-ref ref="STDOUT"/>
   </logger>  
+  <logger name="com.im" level="debug" additivity="false">
+        <appender-ref ref="STDOUT"/>
+  </logger>
   <root level="error">             
     <appender-ref ref="STDOUT" />   
   </root>     
